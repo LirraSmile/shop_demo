@@ -1,10 +1,17 @@
 import requests
 
-def get_bot_updates():
+def get_bot_updates(limit):
 
     url = "https://api.telegram.org/bot600232593:AAFdYV-TtqWkShMFadOwH8x9V_pAA1HtALQ/getUpdates"
 
-    response = requests.get(url)
+    # записываем параметры в словарь
+
+    par = {'limit':limit}
+
+    # передаем словарь в аргумент функции
+    
+    response = requests.get(url, params=par)
+
 
     #форматируем json в словарь
 
@@ -12,4 +19,4 @@ def get_bot_updates():
 
     return decoded['result']
 
-print(get_bot_updates())
+print(get_bot_updates(5))
