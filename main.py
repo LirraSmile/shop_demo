@@ -23,19 +23,27 @@ def get_bot_updates(limit, offset):
 
 result = get_bot_updates(5, 0)
 
+
+first_update = [result]
+
 # получаем текст сообщения
 
-first_update = result[0]
+for item in result:
 
-text = result[0]['message']['text']
+    text = item['message']['text']
 
-message_id = result[0]['message']['message_id']
+    #message_id = item['message']['message_id']
+
+    update_id = item['update_id']
+
+    new_offset = update_id + 1     
+
+    print(update_id, text)
+
+    get_bot_updates(5, new_offset)
 
 
-new_offset = message_id + 1 
 
-# выводим текст сообщения и отмечаем прочитанным
 
-print(message_id, text)
 
-get_bot_updates(5, new_offset)
+
