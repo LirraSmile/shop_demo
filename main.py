@@ -1,8 +1,12 @@
 import requests
 
+from config import token
+
+url = "https://api.telegram.org/bot"
+
 def get_bot_updates(limit, offset):
 
-    url = "https://api.telegram.org/bot600232593:AAFdYV-TtqWkShMFadOwH8x9V_pAA1HtALQ/getUpdates"
+    req = url + token + '/getUpdates'
 
     # записываем параметры в словарь
 
@@ -10,7 +14,7 @@ def get_bot_updates(limit, offset):
 
     # передаем словарь в аргумент функции
     
-    result = requests.get(url, params=par)
+    result = requests.get(req, params=par)
 
 
     #форматируем json в словарь
@@ -31,8 +35,6 @@ first_update = [result]
 for item in result:
 
     text = item['message']['text']
-
-    #message_id = item['message']['message_id']
 
     update_id = item['update_id']
 
