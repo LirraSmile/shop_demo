@@ -4,7 +4,7 @@ from config import token
 
 url = "https://api.telegram.org/bot"
 
-url_crypto = "https://api.cryptonator.com/api/ticker"
+url_crypto = "https://api.cryptonator.com/api/ticker/"
 
 # Получаем последнее обновление
 
@@ -27,19 +27,19 @@ def get_bot_updates(limit, offset):
 
     return decoded['result']
 
-def get_currencies(bace):
+# Получаем курс криптовалюты
 
-    request = url_crypto + bace + '-usd'
+def get_currencies(base):
 
-    params = {'bace': bace}
+    request = url_crypto + base + '-usd'
 
-    response = requests.get(request, params = params)
+    params = {'base': base}
+
+    result = requests.get(request, params = params)
 
     decoded = result.json()
 
-    for item in decoded:
-
-        price = item['ticker']['price']
+    price = decoded['ticker']['price']
 
     return price
 
@@ -59,23 +59,21 @@ def sent_message(chat, text):
 
 def get_command(text):
 
-
-
     if text == '/start':
 
         sent_message(id_sender, 'Hello, can I help u?')
 
     elif text == '/btc':
 
-        bace = 'BTC'
+        base = 'BTC'
 
-        sent_message(id_sender, get_currencies(bace))
+        sent_message(id_sender, get_currencies(base))
 
     elif text == '/eth':
 
-        bace = 'ETH'
+        base = 'ETH'
 
-        sent_message(id_sender, get_currencies(bace))
+        sent_message(id_sender, get_currencies(base))
 
     else:
 
