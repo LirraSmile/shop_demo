@@ -1,16 +1,24 @@
 import requests
 
+from config import token
+
+url = "https://api.telegram.org/bot"
+
+url_crypto = "https://api.cryptonator.com/api/ticker/"
+
+# Получаем последнее обновление
+
 def get_bot_updates(limit, offset):
 
-    url = "https://api.telegram.org/bot600232593:AAFdYV-TtqWkShMFadOwH8x9V_pAA1HtALQ/getUpdates"
+    request = url + token + '/getUpdates'
 
     # записываем параметры в словарь
 
-    par = {'limit':limit, 'offset':offset}
+    params = {'limit':limit, 'offset':offset}
 
     # передаем словарь в аргумент функции
     
-    result = requests.get(url, params=par)
+    result = requests.get(request, params=params)
 
 
     #форматируем json в словарь
@@ -19,12 +27,60 @@ def get_bot_updates(limit, offset):
 
     return decoded['result']
 
-#print(get_bot_updates(5))
+# Получаем курс криптовалюты
+
+def get_currencies(base):
+
+    request = url_crypto + base + '-usd'
+
+    params = {'base': base}
+
+    result = requests.get(request, params = params)
+
+    decoded = result.json()
+
+    price = decoded['ticker']['price']
+
+    return price
+
+# Отвечаем на сообщения
+
+def sent_message(chat, text):
+
+    request = url + token + '/sendMessage'
+
+    params = {'chat_id': chat, 'text': text}
+
+    response = requests.post(request, params = params)
+
+    return response
+
+
+
+def get_command(text):
+
+    if text == '/start':
+
+        sent_message(id_sender, 'Hello, can I help u?')
+
+    elif text == '/btc':
+
+        base = 'BTC'
+
+        sent_message(id_sender, 'Курс биткоин на сегодня 1 btc = {:.4}'.format(get_currencies(base)) + '$')
+
+    elif text == '/eth':
+
+        base = 'ETH'
+
+        sent_message(id_sender, 'Курс эфира на сегодня 1 eth = {:.4}'.format(get_currencies(base)) + '$')
+
+    else:
+
+        sent_message(id_sender, 'Do not understand u. Please, try again')
+
 
 result = get_bot_updates(5, 0)
-
-
-first_update = [result]
 
 # получаем текст сообщения
 
@@ -32,15 +88,19 @@ for item in result:
 
     text = item['message']['text']
 
-    #message_id = item['message']['message_id']
+    id_sender = item['message']['chat']['id']
 
     update_id = item['update_id']
 
     new_offset = update_id + 1     
 
-    print(update_id, text)
+    print(update_id, id_sender, text)
 
-    get_bot_updates(5, new_offset)
+    get_bot_updates(5, new_offset)   
+
+    get_command(text) 
+
+
 
 
 
