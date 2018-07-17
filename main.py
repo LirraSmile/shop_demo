@@ -67,13 +67,13 @@ def get_command(text):
 
         base = 'BTC'
 
-        sent_message(id_sender, 'Курс биткоин на сегодня 1 btc = {:.4}'.format(get_currencies(base)) + '$')
+        sent_message(id_sender, 'Курс биткоин на сегодня 1 btc = {}'.format(get_currencies(base)) + '$')
 
     elif text == '/eth':
 
         base = 'ETH'
 
-        sent_message(id_sender, 'Курс эфира на сегодня 1 eth = {:.4}'.format(get_currencies(base)) + '$')
+        sent_message(id_sender, 'Курс эфира на сегодня 1 eth = {}'.format(get_currencies(base)) + '$')
 
     else:
 
