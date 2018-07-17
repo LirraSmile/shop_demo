@@ -37,15 +37,20 @@ def sent_message(chat, text):
 
 def get_command(text):
     if text == '/start':
-        sent_message(id_sender, 'Hello, can I help u?')
+        rate_text = 'Hello, can I help u?'
+
     elif text == '/btc':
         base = 'BTC'
-        sent_message(id_sender, 'Курс биткоин на сегодня 1 btc = {}'.format(get_currencies(base)) + '$')
+        rate_text = 'Курс биткоин на сегодня 1 btc = {}'.format(get_currencies(base)) + '$'
+
     elif text == '/eth':
         base = 'ETH'
-        sent_message(id_sender, 'Курс эфира на сегодня 1 eth = {}'.format(get_currencies(base)) + '$')
+        rate_text = 'Курс эфира на сегодня 1 eth = {}'.format(get_currencies(base)) + '$'
+
     else:
-        sent_message(id_sender, 'Do not understand u. Please, try again')
+        rate_text = 'Do not understand u. Please, try again'
+
+    sent_message(id_sender, rate_text)
 
 result = get_bot_updates(5, 0)
 
