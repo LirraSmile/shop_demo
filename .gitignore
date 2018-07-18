@@ -4,5 +4,5 @@ bot/config.py
 # Ignore library file
 Pipfile
 # Ignore cache
-bot/pycache
-pycache 
+bot/__pycache__
+__pycache__
