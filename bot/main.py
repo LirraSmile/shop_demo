@@ -27,7 +27,7 @@ def get_currencies(base):
 
 # Отвечаем на сообщения
 
-def sent_message(chat, text):
+def send_message(chat, text):
     request = url + token + '/sendMessage'
     params = {'chat_id': chat, 'text': text}
     response = requests.post(request, params = params)
@@ -50,7 +50,7 @@ def get_command(text):
     else:
         rate_text = 'Do not understand u. Please, try again'
 
-    sent_message(id_sender, rate_text)
+    send_message(id_sender, rate_text)
 
 result = get_bot_updates(5, 0)
 
