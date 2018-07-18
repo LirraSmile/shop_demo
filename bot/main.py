@@ -52,17 +52,20 @@ def get_command(text):
 
     send_message(id_sender, rate_text)
 
-result = get_bot_updates(5, 0)
 
+new_offset = 0
 # получаем текст сообщения
-for item in result:
-    text = item['message']['text']
-    id_sender = item['message']['chat']['id']
-    update_id = item['update_id']
-    new_offset = update_id + 1 
-    print(update_id, id_sender, text)
-    get_bot_updates(5, new_offset) 
-    get_command(text) 
+while True:
+    result = get_bot_updates(5, new_offset)
+
+    for item in result:
+        text = item['message']['text']
+        id_sender = item['message']['chat']['id']
+        update_id = item['update_id']
+        get_bot_updates(5, new_offset) 
+        get_command(text) 
+
+    new_offset = update_id + 1
 
 
 
