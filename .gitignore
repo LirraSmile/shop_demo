@@ -1,0 +1,8 @@
+# Lines starting with '#' are considered comments.
+# Ignore config.py file in directory bot
+bot/config.py
+# Ignore library file
+Pipfile
+# Ignore cache
+bot/pycache
+pycache 
