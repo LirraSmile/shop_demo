@@ -15,7 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+# стандартный вью для админки
+from django.contrib import admin
+# модуль Джанго для определения URL'ов
+from django.urls import path 
+# импортируем наш файл views из shop_app
+from shop_app import views 
 
 urlpatterns = [
+    # Oтображать вью на главной странице
+    path('', views.index, name='index'), 
+    #Ссылка на админку
     path('admin/', admin.site.urls),
 ]
