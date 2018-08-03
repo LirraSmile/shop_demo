@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+# import our file views of shop_app
+from shop_app import views 
 
+# we are talking Django about what we want to display our view on the main page
+# and the line belowthe link to our admin
 urlpatterns = [
+    path('', ProductListView.as_view(), name='index'),
     path('admin/', admin.site.urls),
 ]
