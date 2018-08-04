@@ -6,3 +6,5 @@ Pipfile
 # Ignore cache
 bot/__pycache__/
 __pycache__/
+# Ignore ,igrations directory
+shop_app/migrations/

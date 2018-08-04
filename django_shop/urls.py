@@ -21,6 +21,7 @@ from shop_app import views
 # we are talking Django about what we want to display our view on the main page
 # and the line belowthe link to our admin
 urlpatterns = [
-    path('', ProductListView.as_view(), name='index'),
+    path('', views.ProductListView.as_view(), name='index'),
+    path('<int:pk>/', views.ProductDetail.as_view(), name='detail'),
     path('admin/', admin.site.urls),
 ]

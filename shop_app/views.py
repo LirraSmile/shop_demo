@@ -6,21 +6,21 @@ from django.views import generic
 # import our model Product
 from .models import Product
 
-class ProductListView(generic.ListView):
-    
+class ProductListView(generic.ListView):    
     template_name = 'products_list.html' # plug-in our template
-    context_object_name = 'products' # inform under what name data will be transferred to the template
+    # inform under what name data will be transferred to the template
+    context_object_name = 'products' 
     model = Product # name of model
 
-# The standard view is a regular Python function that gets the request 
-"""def index(request):
-    request_method = request.method
-    
-    ip_address = request.META['REMOTE_ADDR']
-    browser_info = request.META['HTTP_USER_AGENT']
-    
-    response_text = "Тип запроса: {}. IP-адрес: {}. ЮзерАгент: {}".format(request_method, ip_address, browser_info)
-    
-    return HttpResponse(response_text)"""
+class ProductDetail(generic.DetailView): 
+    template_name = 'product_detail.html' 
+    model = Product
+
+# method for adding additional information to the context
+def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    # pass a list of all categories to the context dictionary
+    context['categories'] = Category.objects.all()
+    return context
 
 
