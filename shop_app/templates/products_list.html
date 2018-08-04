@@ -1,5 +1,5 @@
 {% for product in products %} 
   <h2>{{product.title}}</h2>
   <p>{{ product.description}}</p>
-  <p>{{ product.category}}</p>
+  <a href="{{ category.get_absolute_url }}">{{ product.category.title }}</a>
 {% endfor %} 
