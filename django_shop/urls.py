@@ -22,6 +22,7 @@ from shop_app import views
 # and the line belowthe link to our admin
 urlpatterns = [
     path('', views.ProductListView.as_view(), name='index'),
-    path('<int:pk>/', views.ProductDetail.as_view(), name='detail'),
+    path('category/<int:pk>/', views.CategoryDetail.as_view(), name='detail'),
+    path('product/<int:pk>/', views.ProductDetail.as_view(), name='detail'),
     path('admin/', admin.site.urls),
 ]

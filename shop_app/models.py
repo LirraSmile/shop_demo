@@ -13,3 +13,11 @@ class Product(models.Model):
 class Category(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(max_length=5000, blank=True)
+
+    class Meta:
+        ordering = ['title']
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+
+    def __str__(self):
+        return self.title

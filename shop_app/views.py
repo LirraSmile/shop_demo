@@ -3,14 +3,20 @@ from django.shortcuts import render
 # import model for CBV            
 from django.views import generic 
 
-# import our model Product
+# import our models
 from .models import Product
+from .models import Category
 
 class ProductListView(generic.ListView):    
     template_name = 'products_list.html' # plug-in our template
     # inform under what name data will be transferred to the template
     context_object_name = 'products' 
     model = Product # name of model
+
+class CategoryDetail(generic.DetailView):    
+    template_name = 'category_detail.html' # plug-in our template
+    # inform under what name data will be transferred to the template
+    model = Category # name of model
 
 class ProductDetail(generic.DetailView): 
     template_name = 'product_detail.html' 
